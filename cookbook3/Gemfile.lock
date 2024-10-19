@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: https://gems.ruby-china.com/
   specs:
     actioncable (7.2.1.1)
       actionpack (= 7.2.1.1)
@@ -300,7 +300,6 @@ PLATFORMS
   x86-linux-gnu
   x86-linux-musl
   x86_64-darwin
-  x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
@@ -321,6 +320,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
+  zeitwerk (~> 2.7)
 
 BUNDLED WITH
    2.5.11

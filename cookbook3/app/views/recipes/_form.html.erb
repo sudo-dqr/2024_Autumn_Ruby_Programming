@@ -15,7 +15,16 @@
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title %>
   </div>
-  <div><%= form.collection_select(:category_id, Category.all, :id, :name) %></div>
+  
+  <div>
+    <%= form.label :instructions, "Instructions", style: "display: block" %>
+    <%= form.text_area :instructions %>
+  </div>
+
+  <div>
+    <%= form.collection_select(:category_id, Category.all, :id, :name) %>
+  </div>
+  
   <div>
     <%= form.submit %>
   </div>

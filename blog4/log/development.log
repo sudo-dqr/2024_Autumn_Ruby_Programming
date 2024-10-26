@@ -1042,3 +1042,54 @@ Processing by BlogsController#show as HTML
 Completed 200 OK in 10ms (Views: 8.2ms | ActiveRecord: 0.1ms (2 queries, 0 cached) | GC: 0.5ms)
 
 
+Started GET "/" for 127.0.0.1 at 2024-10-27 00:25:32 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BlogsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering blogs/index.html.erb within layouts/application
+  [1m[36mBlog Load (4.9ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs"[0m
+  ↳ app/views/blogs/index.html.erb:3
+  Rendered blogs/index.html.erb within layouts/application (Duration: 38.2ms | GC: 14.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 129.0ms | GC: 15.2ms)
+Completed 200 OK in 191ms (Views: 133.5ms | ActiveRecord: 5.9ms (1 query, 0 cached) | GC: 45.1ms)
+
+
+Started GET "/blogs" for 127.0.0.1 at 2024-10-27 00:25:39 +0800
+Processing by BlogsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering blogs/index.html.erb within layouts/application
+  [1m[36mBlog Load (3.9ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs"[0m
+  ↳ app/views/blogs/index.html.erb:3
+  Rendered blogs/index.html.erb within layouts/application (Duration: 17.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 26.1ms | GC: 0.0ms)
+Completed 200 OK in 28ms (Views: 22.8ms | ActiveRecord: 3.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs/1/comments" for 127.0.0.1 at 2024-10-27 00:25:46 +0800
+Processing by CommentsController#index as HTML
+  Parameters: {"blog_id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering comments/index.html.erb within layouts/application
+  [1m[36mComment Load (1.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments"[0m
+  ↳ app/views/comments/index.html.erb:8
+  Rendered comments/_comment.html.erb (Duration: 1.2ms | GC: 0.0ms)
+  Rendered comments/index.html.erb within layouts/application (Duration: 32.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 33.3ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 45ms (ActiveRecord: 4.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `comment_path' for an instance of #<Class:0x000074a9304e0658>):
+
+Causes:
+NoMethodError (undefined method `comment_path' for an instance of #<Class:0x000074a9304e0658>)
+     8:   <% @comments.each do |comment| %>
+     9:     <%= render comment %>
+    10:     <p>
+    11:       <%= link_to "Show this comment", comment %>
+    12:     </p>
+    13:   <% end %>
+    14: </div>
+  
+app/views/comments/index.html.erb:11
+app/views/comments/index.html.erb:8

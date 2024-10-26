@@ -6,10 +6,25 @@
 
 <div id="recipes">
   <% @recipes.each do |recipe| %>
-    <%= render recipe %>
-    <p>
-      <%= link_to "Show this recipe", recipe %>
-    </p>
+    <div>
+      <p>
+        <strong>Title:</strong>
+        <%= recipe.title %>
+      </p>
+      <p>
+        <strong>Instructions:</strong>
+        <%= recipe.instructions %>
+      </p>
+      <p>
+        <strong>Category:</strong>
+        <%= recipe.category.name %>
+      </p>
+      <p>
+        <%= link_to "Show this recipe", recipe %>
+        <%= link_to "Edit this recipe", edit_recipe_path(recipe) %>
+        <%= link_to "Destroy this recipe", recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </p>
+    </div>
   <% end %>
 </div>
 

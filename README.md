@@ -1,5 +1,3 @@
-# <div align = "center">Ruby Project</div>
+# Ruby Project
 
-* 2024秋季Ruby课程设计
-* 实现了一个简易电子商务系统
-
+* Ruby课程设计大作业, 一个简单的电子商务系统

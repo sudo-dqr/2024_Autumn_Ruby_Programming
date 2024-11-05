@@ -1,12 +1,12 @@
 class Product < ApplicationRecord
-  hasmany :product_items, dependent: :destroy
-  hasmany :items, through: :product_items, dependent: :destroy
+  has_many :product_items, dependent: :destroy
+  has_many :items, through: :product_items, dependent: :destroy
 
-  hasmany :product_carts, dependent: :destroy
-  hasmany :carts, through: :product_carts, dependent: :destroy
+  has_many :product_carts, dependent: :destroy
+  has_many :carts, through: :product_carts, dependent: :destroy
 
-  hasmany :product_favorites, dependent: :destroy
-  hasmany :favorites, through: :product_favorites, dependent: :destroy
+  has_many :product_favorites, dependent: :destroy
+  has_many :favorites, through: :product_favorites, dependent: :destroy
 
   validates :name, presence: true
   validates :price, presence: true

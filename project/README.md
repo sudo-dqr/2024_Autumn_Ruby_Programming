@@ -8,7 +8,6 @@
 * Rails 7.2.1
 * bundle 2.5.22
 * Ubuntu 22.04
-* 本项目采用开源框架[spree](https://github.com/spree/spree)辅助完成
 
 ## 1. 数据库设计
 

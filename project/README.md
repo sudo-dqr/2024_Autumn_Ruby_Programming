@@ -13,18 +13,21 @@
 
 > 本部分设计主要参考课程要求中的要求实现.
 
-### 1.1 User
+### 1.1 数据模型设计
+
+#### 1.1 User
 
 > 用户表
 
-| 属性     | 解释     | 数据类型 |
-| -------- | -------- | -------- |
-| id       | 用户id   | bigint   |
-| name     | 用户名字 | string   |
-| email    | 用户邮箱 | string   |
-| password | 用户密码 | string   |
+| 属性     | 解释           | 数据类型 |
+| -------- | -------------- | -------- |
+| id       | 用户id         | bigint   |
+| name     | 用户名字       | string   |
+| email    | 用户邮箱       | string   |
+| password | 用户密码       | string   |
+| role_id  | 用户所属角色id | bigint   |
 
-### 1.2 Role
+#### 1.2 Role
 
 > 角色表(普通用户/管理员)
 
@@ -33,16 +36,7 @@
 | id   | 角色id   | bigint   |
 | name | 角色名称 | string   |
 
-### 1.3 Role_User
-
-> 用户-角色关联表
-
-| 属性    | 解释     | 数据类型 |
-| ------- | -------- | -------- |
-| role_id | 角色表id | bigint   |
-| user_id | 用户表id | bigint   |
-
-### 1.4 Product
+#### 1.3 Product
 
 > 产品表
 
@@ -55,56 +49,60 @@
 | sales       | 销量     | integer  |
 | ...         |          |          |
 
-### 1.5 Order
+#### 1.4 Order
 
 > 订单表
 
 | 属性         | 解释       | 数据类型 |
 | ------------ | ---------- | -------- |
-| number       | 订单号     | string   |
 | total        | 订单总金额 | decimal  |
 | state        | 订单状态   | integer  |
 | user_id      | 所属用户id | bigint   |
 | completed_at | 完成时间   | datetime |
 
-### 1.6 Item
+#### 1.5 Item
 
 > 订单项表
 
-| 属性       | 解释                 | 数据类型 |
-| ---------- | -------------------- | -------- |
-| id         | 关联到订单表的id     | bigint   |
-| variant_id | 关联到产品变体表的id | bigint   |
-| price      | 订单项价格           | decimal  |
-| quantity   | 订单项数量           | integer  |
+| 属性     | 解释             | 数据类型 |
+| -------- | ---------------- | -------- |
+| order_id | 关联到订单表的id | bigint   |
+| price    | 订单项价格       | decimal  |
+| quantity | 订单项数量       | integer  |
 
-### 1.7 Favorite
+#### 1.6 Favorite
 
 > 收藏夹表
 
-| 属性       | 解释     | 数据类型 |
-| ---------- | -------- | -------- |
-| user_id    | 用户id   | bigint   |
-| product_id | 产品id   | bigint   |
-| added_at   | 添加时间 | datetime |
+| 属性     | 解释     | 数据类型 |
+| -------- | -------- | -------- |
+| user_id  | 用户id   | bigint   |
+| added_at | 添加时间 | datetime |
 
-### 1.8 Cart
+#### 1.7 Cart
 
 > 购物车表
 
-| 属性       | 解释     | 数据类型 |
-| ---------- | -------- | -------- |
-| user_id    | 用户id   | bigint   |
-| product_id | 产品id   | bigint   |
-| quantity   | 产品数量 | integer  |
-| added_at   | 添加时间 | datetime |
+| 属性     | 解释     | 数据类型 |
+| -------- | -------- | -------- |
+| user_id  | 用户id   | bigint   |
+| quantity | 产品数量 | integer  |
+| added_at | 添加时间 | datetime |
+
+### 1.2 模型关系设计与E-R图
+
+<img src="docs/imgs/E-R.png" height=500p>
+
+​	数据实体之间的关联通常有一对一、一对多、多对多三种模式：
+
+* 一对一模式中：采用`belongs_to`，`has_one`以及外键实现.
+  * User->Role, User->Cart, User->Favorite
+* 一对多模式中：采用`belongs_to`，`has_many`以及外键实现.
+  * User->Order
+* 多对多模式中：采用`has_many:through`的方法，提供了更好的灵活性.
+  * Item->Product, Favorite->Product, Cart->Product
 
 ## 2. 系统功能设计
-
->* 默认的管理员帐号：dqr@example.com OKdqr040903
->* 默认的用户帐号：040903@example.com okDQR040903
-
-### 2.1 管理员功能
 
 * 添加/编辑/查看/删除产品
 * 查看所有订单列表

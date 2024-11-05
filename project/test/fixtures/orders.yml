@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  state: 1
+  completed_at: 2024-11-05 23:54:08
+  user: one
+
+two:
+  state: 1
+  completed_at: 2024-11-05 23:54:08
+  user: two

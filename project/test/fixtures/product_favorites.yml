@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: one
+  favorite: one
+  added_at: 2024-11-06 00:07:51
+
+two:
+  product: two
+  favorite: two
+  added_at: 2024-11-06 00:07:51

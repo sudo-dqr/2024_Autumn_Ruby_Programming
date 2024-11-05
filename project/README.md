@@ -101,6 +101,7 @@
   * User->Order
 * 多对多模式中：采用`has_many:through`的方法，提供了更好的灵活性.
   * Item->Product, Favorite->Product, Cart->Product
+  * 通过设计中间表ProductItem,ProductFavorite,ProductCart完成，每个表中保存两个外键和added_time
 
 ## 2. 系统功能设计
 

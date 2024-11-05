@@ -91,7 +91,7 @@
 
 ### 1.2 模型关系设计与E-R图
 
-<img src="docs/imgs/E-R.png" height=500p>
+<img src="docs/imgs/E-R.png" height=500p align="center">
 
 ​	数据实体之间的关联通常有一对一、一对多、多对多三种模式：
 

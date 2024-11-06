@@ -156,7 +156,10 @@
                     <% if current_user.role.name == 'admin' %>
                         <a href="<%= admin_dashboard_path %>">管理员面板</a>
                     <% end %>
-                    <button onclick="location.href='<%= logout_path %>'">登出</button>
+                    <form action="<%= logout_path %>" method="delete" class="logout-form">
+                    <%= csrf_meta_tags %>
+                    <button type="submit">登出</button>
+                    </form>
                 <% else %>
                     <a href="<%= login_path %>">登录</a>
                     <a href="<%= new_user_path %>">注册</a>

@@ -78,6 +78,24 @@
     p {
       color: #666;
     }
+
+    /* 登出按钮样式 */
+    .logout-form button {
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      border: none;
+      background-color: transparent;
+      transition: background-color 0.3s, transform 0.2s;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .logout-form button:hover {
+      background-color: #25567b;
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 <body>
@@ -86,7 +104,10 @@
       <h1>管理员面板</h1>
       <nav>
         <%= link_to '首页', root_path, class: 'nav-link text-white' %>
-        <%= link_to '登出', logout_path, method: :delete, class: 'nav-link text-white' %>
+        <form action="<%= logout_path %>" method="delete" class="logout-form">
+          <%= csrf_meta_tags %>
+          <button type="submit">登出</button>
+        </form>
       </nav>
     </div>
   </div>

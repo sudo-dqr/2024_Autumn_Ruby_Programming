@@ -1,89 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>登录页面</title>
-<style>
-  body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - Tech Reads</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  .container-fluid {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f7f7f7;
-  }
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag 'home', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
 
-  .login-container {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    border-radius: 8px;
-  }
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-  .login-header {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
+        body {
+            margin: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
 
-  .login-form .form-control {
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 15px;
-  }
+        .header {
+            background-image: linear-gradient(to right, #334d5c, #2e94e8);
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
 
-  .login-form .btn-primary {
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+        .header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-  .login-form .btn-primary:hover {
-    background-color: #0056b3;
-  }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
 
-  .d-grid {
-    display: grid;
-    gap: 2rem;
-  }
+        .header nav {
+            display: flex;
+            gap: 20px;
+        }
 
-  .d-grid > * {
-    justify-self: center;
-  }
-</style>
+        .header nav a,
+        .header nav button {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 600;
+        }
+
+        .header nav a:hover,
+        .header nav button:hover {
+            background-color: #25567b;
+            transform: translateY(-2px);
+        }
+
+        .header nav button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin-top: 60px; /* Offset for the fixed header */
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #334d5c;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #334d5c;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #2e94e8;
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #2e94e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1c76bd;
+        }
+
+        .text-center {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .text-center a {
+            color: #2e94e8;
+            text-decoration: none;
+        }
+
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<div class="container-fluid d-flex justify-content-center align-items-center vh-100">
-  <div class="login-container">
-    <div class="login-header text-center">登录</div>
-    <%= form_with(url: login_path, method: :post, local: true, class: 'login-form') do |form| %>
-      <div class="mb-3">
-        <%= form.label :email, '邮箱', class: 'form-label' %>
-        <%= form.email_field :email, class: 'form-control' %>
-      </div>
-      <div class="mb-3">
-        <%= form.label :password, '密码', class: 'form-label' %>
-        <%= form.password_field :password, class: 'form-control' %>
-      </div>
-      <div class="d-grid gap-2">
-        <%= form.submit '登录', class: 'btn btn-primary w-100' %>
-      </div>
-    <% end %>
-  </div>
-</div>
+    <div class="header">
+        <div class="container">
+            <h1>Welcome to Geek Haven</h1>
+            <nav>
+                <a href="<%= root_path %>">首页</a>
+                <% if current_user %>
+                    <a href="<%= user_path(current_user) %>">个人资料</a>
+                    <% if current_user.role.name == 'admin' %>
+                        <a href="<%= admin_dashboard_path %>">管理员面板</a>
+                    <% end %>
+                    <button onclick="location.href='<%= logout_path %>'">登出</button>
+                <% else %>
+                    <a href="<%= login_path %>">登录</a>
+                    <a href="<%= new_user_path %>">注册</a>
+                <% end %>
+            </nav>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <div class="login-header">登录</div>
+        <%= form_with(url: login_path, method: :post, local: true) do |form| %>
+            <div>
+                <%= form.label :email, '邮箱', class: 'form-label' %>
+                <%= form.email_field :email, class: 'form-control' %>
+            </div>
+            <div>
+                <%= form.label :password, '密码', class: 'form-label' %>
+                <%= form.password_field :password, class: 'form-control' %>
+            </div>
+            <%= form.submit '登录', class: 'btn' %>
+        <% end %>
+        <div class="text-center">
+            <p>还没有账户? <a href="<%= new_user_path %>">注册</a></p>
+        </div>
+    </div>
 </body>
 </html>

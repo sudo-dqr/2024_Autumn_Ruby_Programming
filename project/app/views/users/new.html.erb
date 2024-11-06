@@ -1,103 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>注册页面</title>
-<style>
-  body, html {
-    height: 100%;
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    background-color: #f0f4f8;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - Tech Reads</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  .container-fluid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag 'home', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
 
-  .login-container {
-    width: 100%;
-    max-width: 500px; /* 增加最大宽度 */
-    padding: 30px; /* 增加内边距 */
-    background: white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    text-align: center;
-  }
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-  .login-header {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
+        body {
+            margin: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
 
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Adjust the gap between form elements */
-  }
+        .header {
+            background-image: linear-gradient(to right, #334d5c, #2e94e8);
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
 
-  .login-form .form-control {
-    border-radius: 8px;
-    border: 2px solid #d1d5db;
-    padding: 15px; /* 增加内边距 */
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    width: 100%;
-  }
+        .header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-  .login-form .form-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #4b5563;
-  }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
 
-  .login-form .btn {
-    background-color: #48bb78;
-    border: none;
-    border-radius: 8px;
-    padding: 15px 40px; /* 增加内边距 */
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    box-sizing: border-box;
-  }
+        .header nav {
+            display: flex;
+            gap: 20px;
+        }
 
-  .login-form .btn:hover {
-    background-color: #38a169;
-  }
-</style>
+        .header nav a,
+        .header nav button {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 600;
+        }
+
+        .header nav a:hover,
+        .header nav button:hover {
+            background-color: #25567b;
+            transform: translateY(-2px);
+        }
+
+        .header nav button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .register-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin-top: 60px; /* Offset for the fixed header */
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #334d5c;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #334d5c;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #2e94e8;
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #2e94e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1c76bd;
+        }
+
+        .text-center {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .text-center a {
+            color: #2e94e8;
+            text-decoration: none;
+        }
+
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<div class="container-fluid">
-  <div class="login-container">
-    <div class="login-header">注册</div>
-    <%= form_with(model: @user, local: true, class: 'login-form') do |form| %>
-      <div class="mb-3">
-        <%= form.label :name, '用户名', class: 'form-label' %>
-        <%= form.text_field :name, class: 'form-control' %>
-      </div>
-      <div class="mb-3">
-        <%= form.label :email, '邮箱', class: 'form-label' %>
-        <%= form.email_field :email, class: 'form-control' %>
-      </div>
-      <div class="mb-3">
-        <%= form.label :password, '密码', class: 'form-label' %>
-        <%= form.password_field :password, class: 'form-control' %>
-      </div>
-      <div class="mb-3">
-        <%= form.label :password_confirmation, '确认密码', class: 'form-label' %>
-        <%= form.password_field :password_confirmation, class: 'form-control' %>
-      </div>
-      <%= form.submit '注册', class: 'btn btn-success' %>
-    <% end %>
-  </div>
-</div>
+    <div class="header">
+        <div class="container">
+            <h1>Welcome to Geek Haven</h1>
+            <nav>
+                <a href="<%= root_path %>">首页</a>
+                <% if current_user %>
+                    <a href="<%= user_path(current_user) %>">个人资料</a>
+                    <% if current_user.role.name == 'admin' %>
+                        <a href="<%= admin_dashboard_path %>">管理员面板</a>
+                    <% end %>
+                    <button onclick="location.href='<%= logout_path %>'">登出</button>
+                <% else %>
+                    <a href="<%= login_path %>">登录</a>
+                    <a href="<%= new_user_path %>">注册</a>
+                <% end %>
+            </nav>
+        </div>
+    </div>
+
+    <div class="register-container">
+        <div class="register-header">注册</div>
+        <%= form_with(model: @user, method: :post, local: true) do |form| %>
+            <div>
+                <%= form.label :name, '用户名', class: 'form-label' %>
+                <%= form.text_field :name, class: 'form-control' %>
+            </div>
+            <div>
+                <%= form.label :email, '邮箱', class: 'form-label' %>
+                <%= form.email_field :email, class: 'form-control' %>
+            </div>
+            <div>
+                <%= form.label :password, '密码', class: 'form-label' %>
+                <%= form.password_field :password, class: 'form-control' %>
+            </div>
+            <div>
+                <%= form.label :password_confirmation, '确认密码', class: 'form-label' %>
+                <%= form.password_field :password_confirmation, class: 'form-control' %>
+            </div>
+            <%= form.submit '注册', class: 'btn' %>
+        <% end %>
+        <div class="text-center">
+            <p>已有账户? <a href="<%= login_path %>">登录</a></p>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,10 +1,179 @@
-<p style="color: green"><%= notice %></p>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - Tech Reads</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-<%= render @user %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag 'home', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
 
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
-</div>
+        body {
+            margin: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            background-image: linear-gradient(to right, #334d5c, #2e94e8);
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .header nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header nav a,
+        .header nav button {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 600;
+        }
+
+        .header nav a:hover,
+        .header nav button:hover {
+            background-color: #25567b;
+            transform: translateY(-2px);
+        }
+
+        .header nav button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .register-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin-top: 60px; /* Offset for the fixed header */
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #334d5c;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #334d5c;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #2e94e8;
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #2e94e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1c76bd;
+        }
+
+        .text-center {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .text-center a {
+            color: #2e94e8;
+            text-decoration: none;
+        }
+
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Welcome to Geek Haven</h1>
+            <nav>
+                <a href="<%= root_path %>">首页</a>
+                <% if current_user %>
+                    <a href="<%= user_path(current_user) %>">个人资料</a>
+                    <% if current_user.role.name == 'admin' %>
+                        <a href="<%= admin_dashboard_path %>">管理员面板</a>
+                    <% end %>
+                    <form action="<%= logout_path %>" method="delete" class="logout-form">
+                    <%= csrf_meta_tags %>
+                    <button type="submit">登出</button>
+                    </form>
+                <% else %>
+                    <a href="<%= login_path %>">登录</a>
+                    <a href="<%= new_user_path %>">注册</a>
+                <% end %>
+            </nav>
+        </div>
+    </div>
+  <div class="container mt-4">
+    <p class="notice"><%= notice %></p>
+
+    <%= render @user %>
+
+    <div class="actions">
+      <%= link_to "编辑用户", edit_user_path(@user), class: "btn btn-primary" %>
+  </div>
+</body>
+</html>

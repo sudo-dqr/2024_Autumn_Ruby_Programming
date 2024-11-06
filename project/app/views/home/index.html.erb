@@ -22,7 +22,7 @@
           <% if current_user.role.name == 'admin' %>
             <%= link_to '管理员面板', admin_dashboard_path, class: 'nav-link text-white' %>
           <% end %>
-          <%= link_to '登出', logout_path, method: :delete, class: 'nav-link text-white' %>
+          <%= button_to '登出', logout_path, method: :delete, class: 'nav-link text-white' %>
         <% else %>
           <%= link_to '登录', login_path, class: 'nav-link text-white' %>
           <%= link_to '注册', new_user_path, class: 'nav-link text-white' %>

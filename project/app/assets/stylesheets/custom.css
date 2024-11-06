@@ -1,0 +1,41 @@
+/* 自定义样式 */
+body {
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #007bff;
+}
+
+.login-form .form-control {
+  border-radius: 5px;
+}
+
+.login-form .btn {
+  border-radius: 5px;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.login-form .btn:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}

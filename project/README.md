@@ -125,5 +125,6 @@
 
 1. `cd project`
 2. `bundle install`
-3. `bin/rails setup`
-4. `bin/rails serve`：默认在3000端口上运行
+3. `bin/rails db:migrate`
+4. `bin/rails db:seed`
+5. `bin/rails serve`：默认在3000端口上运行

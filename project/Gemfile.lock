@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: https://gems.ruby-china.com/
   specs:
     actioncable (7.2.2)
       actionpack (= 7.2.2)
@@ -313,6 +313,7 @@ DEPENDENCIES
   debug
   importmap-rails
   jbuilder
+  parser (~> 3.3)
   puma (>= 5.0)
   rails (~> 7.2.2)
   rubocop-rails-omakase

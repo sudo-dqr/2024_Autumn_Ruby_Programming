@@ -1,4 +1,81 @@
-<div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>注册页面</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0f4f8;
+  }
+
+  .container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .login-container {
+    width: 100%;
+    max-width: 500px; /* 增加最大宽度 */
+    padding: 30px; /* 增加内边距 */
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .login-header {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Adjust the gap between form elements */
+  }
+
+  .login-form .form-control {
+    border-radius: 8px;
+    border: 2px solid #d1d5db;
+    padding: 15px; /* 增加内边距 */
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .login-form .form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #4b5563;
+  }
+
+  .login-form .btn {
+    background-color: #48bb78;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 40px; /* 增加内边距 */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .login-form .btn:hover {
+    background-color: #38a169;
+  }
+</style>
+</head>
+<body>
+<div class="container-fluid">
   <div class="login-container">
     <div class="login-header">注册</div>
     <%= form_with(model: @user, local: true, class: 'login-form') do |form| %>
@@ -18,7 +95,9 @@
         <%= form.label :password_confirmation, '确认密码', class: 'form-label' %>
         <%= form.password_field :password_confirmation, class: 'form-control' %>
       </div>
-      <%= form.submit '注册', class: 'btn btn-success w-100' %>
+      <%= form.submit '注册', class: 'btn btn-success' %>
     <% end %>
   </div>
 </div>
+</body>
+</html>

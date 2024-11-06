@@ -16,8 +16,9 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   # 管理员面板
-  get 'admin_dashboard', to: 'admin#dashboard'
-
+  namespace :admin do
+    get "dashboard" => "dashboard#index"
+  end
   # 商城主页
   root "home#index"
 

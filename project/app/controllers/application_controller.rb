@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   def admin?
     current_user && current_user.role.name == 'admin'
   end
+
+  def authenticate_admin!
+    redirect_to root_path, alert: '需要管理员访问权限' unless admin?
+  end
 end

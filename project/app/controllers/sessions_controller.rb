@@ -7,13 +7,13 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       if user.role.name == 'admin'
-        redirect_to root_path, notice: '管理员登录成功！'
+        redirect_to root_path, notice: '管理员登录成功！', status: 303
       else
-        redirect_to root_path, notice: '登录成功！'
+        redirect_to root_path, notice: '登录成功！', status: 303
       end
     else
       flash.now[:alert] = '邮箱或密码无效。'
-      render :new, status: :unprocessable_entity
+      render :new, status: 422
     end
   end
 

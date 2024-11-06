@@ -26,9 +26,9 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "用户注册成功！"
+      redirect_to root_path, notice: "用户注册成功！", status: 303
     else
-      render :new
+      render :new, status: 422
     end
   end
 

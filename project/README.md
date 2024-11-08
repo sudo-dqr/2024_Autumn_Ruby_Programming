@@ -105,6 +105,8 @@
 
 ## 2. 系统功能设计
 
+### 2.1 管理员功能
+
 * 添加/编辑/查看/删除产品
 * 查看所有订单列表
 * 处理订单(发货/删除)
@@ -128,3 +130,5 @@
 3. `bin/rails db:migrate`
 4. `bin/rails db:seed`
 5. `bin/rails serve`：默认在3000端口上运行
+
+​	默认通过注册页面只能注册普通用户，管理员用户在seed.rb中生成，帐号为admin@example.com，密码password.

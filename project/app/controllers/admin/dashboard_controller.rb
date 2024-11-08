@@ -3,7 +3,9 @@ module Admin
     before_action :authenticate_admin!
 
     def index
-      # 管理员面板的逻辑
+      @products = Product.all
+      @orders = Order.all
+      @users = User.all
     end
   end
 end

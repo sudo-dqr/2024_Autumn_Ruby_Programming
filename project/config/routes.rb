@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :products
   resources :users
   resources :roles
+  resources :cart_products
 
   # 登录和登出
   get 'login', to: 'sessions#new'

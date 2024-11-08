@@ -55,7 +55,7 @@
       padding: 10px 15px;
       text-decoration: none;
       border-radius: 5px;
-      transition: background-color 0.3s, transform 0.2s;
+      transition: all 0.3s ease;
       font-weight: 600;
     }
 
@@ -63,10 +63,11 @@
     .header nav button:hover {
       background-color: #25567b;
       transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
     .container {
-      margin-top: 60px; /* Offset for the fixed header */
+      margin-top: 80px; /* Offset for the fixed header */
       padding: 20px;
     }
 
@@ -79,7 +80,39 @@
       color: #666;
     }
 
-    /* 登出按钮样式 */
+    .card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h3 {
+      font-weight: 700;
+      color: #334d5c;
+    }
+
+    .card button {
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: #2e94e8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .card button:hover {
+      background-color: #25567b;
+    }
+
     .logout-form button {
       color: white;
       padding: 10px 15px;
@@ -87,7 +120,7 @@
       border-radius: 5px;
       border: none;
       background-color: transparent;
-      transition: background-color 0.3s, transform 0.2s;
+      transition: all 0.3s ease;
       font-weight: 600;
       cursor: pointer;
     }
@@ -95,6 +128,55 @@
     .logout-form button:hover {
       background-color: #25567b;
       transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 15px;
+      margin-top: 20px;
+    }
+
+    .table th, .table td {
+      border: 2px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .table th {
+      background-color: #334d5c;
+      color: white;
+    }
+
+    .table td button {
+      padding: 5px 10px;
+      font-size: 14px;
+      background-color: #2e94e8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .table td button:hover {
+      background-color: #25567b;
+    }
+
+    .no-records {
+      text-align: center;
+      font-size: 20px;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .header .container {
+        flex-direction: column;
+      }
+      .header nav {
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
@@ -112,10 +194,74 @@
     </div>
   </div>
 
-  <div class="container mt-4">
+  <div class="container">
     <h2>欢迎来到管理员面板</h2>
     <p>在这里，您可以管理网站的各个方面。</p>
-    <!-- 在这里添加更多管理员面板的内容 -->
+
+    <!-- 产品管理部分 -->
+    <div class="card">
+      <h3>产品管理</h3>
+      <div>
+        <%= link_to '添加新产品', new_product_path, class: 'card button' %>
+      </div>
+      <% if @products.present? %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>产品名称</th>
+              <th>价格</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @products.each do |product| %>
+              <tr>
+                <td><%= product.name %></td>
+                <td><%= product.price %></td>
+                <td>
+                  <%= link_to '编辑', edit_product_path(product), class: 'button' %>
+                  <%= link_to '删除', product_path(product), method: :delete, data: { confirm: '确定删除此产品吗?' }, class: 'button' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p class="no-records">没有找到产品。</p>
+      <% end %>
+    </div>
+
+    <!-- 订单管理部分 -->
+    <div class="card">
+      <h3>订单管理</h3>
+      <% if @orders.present? %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>订单号</th>
+              <th>顾客名称</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @orders.each do |order| %>
+              <tr>
+                <td><%= order.id %></td>
+                <td><%= order.customer_name %></td>
+                <td><%= order.status %></td>
+                <td>
+                  <%= link_to '发货', ship_order_path(order), method: :put, class: 'button' %>
+                  <%= link_to '删除', order_path(order), method: :delete, data: { confirm: '确定删除此订单吗?' }, class: 'button' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p class="no-records">没有找到订单。</p>
+      <% end %>
+    </div>
   </div>
 </body>
 </html>

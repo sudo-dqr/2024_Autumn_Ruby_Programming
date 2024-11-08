@@ -19,4 +19,30 @@ unless User.exists?(email: admin_email)
     password_confirmation: 'password',
     role: admin_role
   )
+
+user_email = 'dqr@example.com'
+unless User.exists?(email: user_email)
+    User.create!(
+      name: 'dqr',
+      email: user_email,
+      password: 'dqr',
+      password_confirmation: 'dqr',
+      role: user_role
+    )
+
+Product.create!(
+  name: '计算机组成原理',
+  description: '计算机组成原理是计算机体系结构中重要的基础课程, 在大二上学期开设',
+  price: 70,
+  sales: 0
+)    
+
+Product.create!(
+  name: '现代操作系统',
+  description: '操作系统是建立在计算机组成原理之上的计算机基础课程, 在大二下学期开设',
+  price: 75,
+  sales: 0
+)
+
+end  
 end

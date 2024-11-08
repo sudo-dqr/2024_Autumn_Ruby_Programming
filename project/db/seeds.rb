@@ -19,6 +19,7 @@ unless User.exists?(email: admin_email)
     password_confirmation: 'password',
     role: admin_role
   )
+end
 
 user_email = 'dqr@example.com'
 unless User.exists?(email: user_email)
@@ -29,6 +30,7 @@ unless User.exists?(email: user_email)
       password_confirmation: 'dqr',
       role: user_role
     )
+end
 
 Product.create!(
   name: '计算机组成原理',
@@ -43,6 +45,3 @@ Product.create!(
   price: 75,
   sales: 0
 )
-
-end  
-end

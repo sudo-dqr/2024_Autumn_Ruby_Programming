@@ -5,7 +5,6 @@ deploy-project:
     - cd /project
     - bundle install
     - rails db:migrate
-    - rails db:seed
     - sv restart project
   only:
   - project

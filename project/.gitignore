@@ -35,5 +35,3 @@
 # sqlite3
 /storage/*
 !/storage/.keep
-
-db/migrate/20241109082213_create_active_storage_tables.active_storage.rb

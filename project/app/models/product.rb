@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  has_one_attached :image
   has_many :product_items, dependent: :destroy
   has_many :items, through: :product_items, dependent: :destroy
 

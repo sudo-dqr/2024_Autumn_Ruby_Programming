@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
-  <title>Tech Reads</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geek Haven - 产品展示</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -15,19 +17,21 @@
     body {
       margin: 0;
       font-family: 'Poppins', Arial, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #f7f7f7;
+      color: #333;
     }
 
+    /* 保留的导航栏样式 */
     .header {
       background-image: linear-gradient(to right, #334d5c, #2e94e8);
       color: white;
-      padding: 15px 0;
+      padding: 20px 0;
       position: fixed;
       width: 100%;
       top: 0;
       left: 0;
       z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .header .container {
@@ -41,7 +45,7 @@
 
     .header h1 {
       margin: 0;
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 700;
     }
 
@@ -72,54 +76,71 @@
       cursor: pointer;
     }
 
-    /* Add some space below the navbar */
-    .header + .container {
-      margin-top: 60px;
+    /* 添加上方的margin-top，避免内容被顶栏遮挡 */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 800px; /* 确保内容在固定导航栏下方显示 */
     }
 
-    /* Product card styling */
+    /* Card布局为两列 */
     .card {
       background-color: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
       overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s;
+      flex: 1 1 calc(50% - 20px); /* 50%宽度减去间隙 */
+      margin-bottom: 20px;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     }
 
+    /* 图片调整：按比例缩放，保持固定宽高 */
     .card-img-top {
-      width: 100%;
-      height: auto;
+      width: 100%; /* 固定宽度，适应父容器 */
+      height: 200px; /* 固定高度 */
+      object-fit: contain; /* 按比例缩放，避免图片变形 */
     }
 
     .card-body {
-      padding: 15px;
+      padding: 20px;
     }
 
     .card-title {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 600;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
     }
 
     .card-text {
-      font-size: 14px;
-      color: #666;
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 15px;
     }
 
+    /* 公共按钮样式 */
     .btn {
-      padding: 8px 15px;
+      padding: 12px 24px; /* 统一按钮内边距 */
       border-radius: 5px;
       border: none;
       cursor: pointer;
       transition: background-color 0.3s, box-shadow 0.3s;
       font-weight: 600;
+      font-size: 16px; /* 统一字体大小 */
+      display: inline-block;
+      text-align: center;
+      width: 100%; /* 让按钮宽度统一 */
     }
 
+    /* 蓝色按钮样式 */
     .btn-primary {
       background-color: #2e94e8;
       color: white;
@@ -127,21 +148,47 @@
 
     .btn-primary:hover {
       background-color: #1c76bd;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .btn-success {
-      background-color: #28a745;
+    /* 紫色按钮样式 */
+    .btn-purple {
+      background-color: #9b4dca;
       color: white;
     }
 
-    .btn-success:hover {
-      background-color: #1e7e34;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    .btn-purple:hover {
+      background-color: #7a39a3;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 按钮并排显示且居中 */
+    .card-body .btn-container {
+      display: flex;
+      justify-content: center; /* 水平居中 */
+      gap: 10px; /* 按钮之间的间距 */
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .card {
+        flex: 1 1 100%; /* 在小屏幕上，卡片占满100%的宽度 */
+      }
+
+      .card-img-top {
+        height: 150px; /* 小屏幕下图片高度变小 */
+      }
+
+      /* 让按钮垂直堆叠显示在小屏幕下 */
+      .card-body .btn-container {
+        flex-direction: column;
+        gap: 10px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- 导航栏 -->
   <div class="header">
     <div class="container">
       <h1>Welcome to Geek Haven</h1>
@@ -164,30 +211,32 @@
     </div>
   </div>
 
-  <div class="container mt-4">
-    <h2 class="mb-4">我们的产品</h2>
-    <div class="row">
-      <% @products.each do |product| %>
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <%# <%= image_tag product.image_url, alt: product.name, class: 'card-img-top' if product.image_url.present? %> 
-            <div class="card-body">
-              <h5 class="card-title"><%= product.name %></h5>
-              <p class="card-text"><%= product.description %></p>
-              <p class="card-text text-success">价格: <%= number_to_currency(product.price) %></p>
-              <div class="d-grid gap-2">
-                <%= link_to '查看详情', product_path(product), class: 'btn btn-primary' %>
-                <%= form_with url: cart_products_path, method: :post do |form| %>
-                  <%= form.hidden_field :product_id, value: product.id %>
-                  <%= form.hidden_field :quantity, value: 1 %>
-                  <%= form.submit '添加到购物车', class: 'btn btn-success' %>
-                <% end %>
-              </div>
-            </div>
+  <!-- 产品展示区域 -->
+  <div class="container">
+    <% @products.each do |product| %>
+      <div class="card">
+        <% if product.image.attached? %>
+          <img src="<%= url_for(product.image) %>" alt="<%= product.name %>" class="card-img-top">
+        <% else %>
+          <img src="https://via.placeholder.com/400x300" alt="默认图片" class="card-img-top"> <!-- 如果没有图片，显示默认占位符 -->
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= product.name %></h5>
+          <p class="card-text"><%= product.description %></p>
+          <p class="card-text text-success">价格: <%= number_to_currency(product.price) %></p>
+          <!-- 按钮容器，使用flex布局并排居中显示 -->
+          <div class="btn-container">
+            <%= link_to '查看详情', product_path(product), class: 'btn btn-primary' %>
+            <%= form_with url: cart_products_path, method: :post do |form| %>
+              <%= form.hidden_field :product_id, value: product.id %>
+              <%= form.hidden_field :quantity, value: 1 %>
+              <%= form.submit '添加到购物车', class: 'btn btn-purple' %>
+            <% end %>
           </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
+
 </body>
 </html>

@@ -11,10 +11,14 @@ Rails.application.routes.draw do
   resources :roles
   resources :cart_products
 
+  resources :carts do
+    resources :cart_products, only: [ :create, :destroy ]
+  end
+
   # 登录和登出
-  get 'login', to: 'sessions#new'
-  post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
+  get "login", to: "sessions#new"
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy"
 
   # 管理员面板
   namespace :admin do

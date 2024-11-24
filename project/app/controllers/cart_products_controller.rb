@@ -5,7 +5,6 @@ class CartProductsController < ApplicationController
     @product = Product.find(params[:product_id])
     @product_cart = @cart.product_carts.build(product: @product, added_at: Time.current)
     @product.product_carts << @product_cart
-
     if @product_cart.save
       redirect_to cart_products_path, notice: "商品已添加到购物车。"
     else

@@ -162,6 +162,12 @@
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
+    /* 绿色按钮样式 */
+    .btn-green {
+      background-color: #4caf50;
+      color: white;
+    }
+
     /* 按钮并排显示且居中 */
     .card-body .btn-container {
       display: flex;
@@ -196,6 +202,7 @@
         <a href="<%= root_path %>">首页</a>
         <% if current_user %>
           <a href="<%= user_path(current_user) %>">个人资料</a>
+          <a href="<%= favorite_products_path%>">我的收藏夹</a>
           <% if current_user.role.name == 'admin' %>
             <a href="<%= admin_dashboard_path %>">管理员面板</a>
           <% end %>
@@ -232,8 +239,13 @@
                 <%= form.hidden_field :quantity, value: 1 %>
                 <%= form.submit '添加到购物车', class: 'btn btn-purple' %>
               <% end %>
+              <%= form_with url: favorite_products_path, method: :post do |form| %>
+                <%= form.hidden_field :product_id, value: product.id %>
+                <%= form.submit '添加到收藏夹', class: 'btn btn-green' %>
+              <% end %>
             <% else %>
               <%= link_to '添加到购物车', login_path, class: 'btn btn-purple' %>
+              <%= link_to '添加到收藏夹', login_path, class: 'btn btn-green'%>
             <% end %>
           </div>
         </div>

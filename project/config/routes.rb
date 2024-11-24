@@ -10,9 +10,14 @@ Rails.application.routes.draw do
   resources :users
   resources :roles
   resources :cart_products
+  resources :favorite_products
 
   resources :carts do
     resources :cart_products, only: [ :create, :destroy ]
+  end
+
+  resources :favorites do
+    resources :favorite_products, only: [ :create, :destroy ]
   end
 
   # 登录和登出

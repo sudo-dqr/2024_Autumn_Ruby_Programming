@@ -228,7 +228,9 @@
                 <td><%= product.price %></td>
                 <td>
                   <%= link_to '编辑', edit_product_path(product), class: 'button' %>
-                  <%= link_to '删除', product_path(product), method: :delete, data: { confirm: '确定删除此产品吗?' }, class: 'button' %>
+                  <%= form_with url: product_path(product), method: :delete, local: true do %>
+                    <%= submit_tag '删除', class: 'btn btn-danger', data: { confirm: '确定删除此产品吗?' } %>
+                  <% end %>
                 </td>
               </tr>
             <% end %>

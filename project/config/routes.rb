@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :carts
   resources :favorites
   resources :items
-  resources :orders
+  resources :orders do
+    member do
+      put :ship
+    end
+  end
   resources :products
   resources :users
   resources :roles

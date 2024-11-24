@@ -152,6 +152,7 @@
         <a href="<%= root_path %>">首页</a>
         <% if current_user %>
           <a href="<%= user_path(current_user) %>">个人资料</a>
+          <a href="<%= favorite_products_path%>">我的收藏夹</a>
           <% if current_user.role.name == 'admin' %>
             <a href="<%= admin_dashboard_path %>">管理员面板</a>
           <% end %>
@@ -190,6 +191,11 @@
           </div>
         <% end %>
       </div>
+      <%= form_with url: orders_path, method: :post do |form| %>
+      <%= form.hidden_field :total, value: @products.sum(&:price) %>
+      <%= form.hidden_field :state, value: 0 %>
+      <%= form.submit '生成订单', class: 'btn btn-primary mt-4' %>
+      <% end %>
     <% end %>
   </div>
 </body>

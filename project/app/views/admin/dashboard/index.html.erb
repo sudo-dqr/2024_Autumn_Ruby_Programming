@@ -185,11 +185,19 @@
     <div class="container">
       <h1>管理员面板</h1>
       <nav>
-        <%= link_to '首页', root_path, class: 'nav-link text-white' %>
-        <form action="<%= logout_path %>" method="delete" class="logout-form">
-          <%= csrf_meta_tags %>
-          <button type="submit">登出</button>
-        </form>
+        <a href="<%= root_path %>">首页</a>
+        <% if current_user %>
+          <a href="<%= user_path(current_user) %>">个人资料</a>
+          <a href="<%= favorite_products_path%>">我的收藏夹</a>
+          <a href="<%= cart_products_path%>">我的购物车</a>
+          <form action="<%= logout_path %>" method="delete" class="logout-form">
+            <%= csrf_meta_tags %>
+            <button type="submit">登出</button>
+          </form>
+        <% else %>
+          <a href="<%= login_path %>">登录</a>
+          <a href="<%= new_user_path %>">注册</a>
+        <% end %>
       </nav>
     </div>
   </div>
@@ -248,18 +256,22 @@
             <% @orders.each do |order| %>
               <tr>
                 <td><%= order.id %></td>
-                <td><%= order.customer_name %></td>
-                <td><%= order.status %></td>
+                <td><%= User.find(order.user_id).name %></td>
+                <td class="<%= status_class(order.state) %>"><%= status_text(order.state) %></td>
                 <td>
-                  <%= link_to '发货', ship_order_path(order), method: :put, class: 'button' %>
-                  <%= link_to '删除', order_path(order), method: :delete, data: { confirm: '确定删除此订单吗?' }, class: 'button' %>
+                  <%= form_with url: ship_order_path(order), method: :put, local: true do %>
+                    <%= submit_tag '发货', class: 'btn btn-primary' %>
+                  <% end %>
+                  <%= form_with url: order_path(order), method: :delete, local: true do %>
+                    <%= submit_tag '删除', class: 'btn btn-danger', data: { confirm: '确定删除此订单吗?' } %>
+                  <% end %>
                 </td>
               </tr>
             <% end %>
           </tbody>
         </table>
       <% else %>
-        <p class="no-records">没有找到订单。</p>
+        <p class="no-records">还没有订单需要处理</p>
       <% end %>
     </div>
   </div>

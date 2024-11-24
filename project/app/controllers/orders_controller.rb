@@ -22,15 +22,12 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
-
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: "Order was successfully created." }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    @order.user = current_user
+    @order.state = 0 # unpaid
+    if @order.save
+      redirect_to root_path, notice: "订单已生成"
+    else 
+      redirect_to cart_products_path, notice: "订单生成失败"
     end
   end
 
@@ -47,12 +44,18 @@ class OrdersController < ApplicationController
     end
   end
 
+  def ship
+    @order = Order.find(params[:id])
+    @order.update(state: 2)
+    redirect_to admin_dashboard_path, notice: "订单已发货"
+  end
+
   # DELETE /orders/1 or /orders/1.json
   def destroy
     @order.destroy!
 
     respond_to do |format|
-      format.html { redirect_to orders_path, status: :see_other, notice: "Order was successfully destroyed." }
+      format.html { redirect_to admin_dashboard_path, status: :see_other, notice: "订单成功删除" }
       format.json { head :no_content }
     end
   end
@@ -65,6 +68,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:state, :completed_at, :user_id)
+      params.permit(:total, :state, :completed_at, :user_id)
     end
 end

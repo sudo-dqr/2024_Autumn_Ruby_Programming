@@ -203,6 +203,7 @@
         <% if current_user %>
           <a href="<%= user_path(current_user) %>">个人资料</a>
           <a href="<%= favorite_products_path%>">我的收藏夹</a>
+          <a href="<%= cart_products_path%>">我的购物车</a>
           <% if current_user.role.name == 'admin' %>
             <a href="<%= admin_dashboard_path %>">管理员面板</a>
           <% end %>

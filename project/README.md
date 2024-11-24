@@ -166,3 +166,7 @@
 ### 7. 用户主页
 
 <img src="docs/imgs/self.png">
+
+### 8. 商品详情
+
+<img src="docs/imgs/product.png">

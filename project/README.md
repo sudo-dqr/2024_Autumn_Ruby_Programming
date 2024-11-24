@@ -132,3 +132,37 @@
 5. `bin/rails serve`：默认在3000端口上运行
 
 ​	默认通过注册页面只能注册普通用户，管理员用户在seed.rb中生成，帐号为admin@example.com，密码password.
+
+## 4. 功能及页面展示
+
+### 1. 网站首页
+
+> 展示页面为使用默认的管理员账户登陆后的页面
+
+<img src='docs/imgs/home.png'>
+
+### 2. 用户登陆页面
+
+<img src="docs/imgs/login.png">
+
+### 3. 用户注册页面
+
+> 默认只能注册普通用户
+
+<img src="docs/imgs/register.png">
+
+### 4. 用户收藏夹页面
+
+<img src="docs/imgs/favorite.png">
+
+### 5. 用户购物车页面
+
+<img src="docs/imgs/cart.png">
+
+### 6. 管理员管理面板页面
+
+<img src="docs/imgs/dashboard.png">
+
+### 7. 用户主页
+
+<img src="docs/imgs/self.png">
